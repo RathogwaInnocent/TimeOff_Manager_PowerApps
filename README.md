@@ -16,4 +16,8 @@ Leave management can be a time-consuming and complex task for HR professionals. 
 
 <img width="832" alt="TOM2" src="https://github.com/RathogwaInnocent/TimeOff_Manager_PowerApps/assets/17208775/90a885ba-9977-4ebe-ad67-6b746757305d">
 
->>> Approve Requests Screen, on this you can see which apporvals need to be approved if you are manager
+>>> Approve Requests Screen, on this screen you can see which apporvals need to be approved if you are manager/approver
+
+<img width="839" alt="TOM5" src="https://github.com/RathogwaInnocent/TimeOff_Manager_PowerApps/assets/17208775/079c1a26-f865-4321-aec9-39ac7e14d4f9">
+
+>>> Decision Screen, on this screen the manager/approver can approve and decline leave requests
