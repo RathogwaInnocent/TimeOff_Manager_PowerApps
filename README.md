@@ -1,6 +1,6 @@
 # TimeOff_Manager_PowerApps
 
-TimeOff Manger is an Canvas APP designed and developed within Power APPS -- Leave management can be a time-consuming and complex task for Personnels. Keeping track of various leave types, managing approvals, and ensuring accurate records can become overwhelming without the right tools. Fortunately, TOM (TimeOff Manager System) offers a comprehensive solution to automate and streamline leave management processes.
+TimeOff Manager is an Canvas APP designed and developed within Power APPS -- Leave management can be a time-consuming and complex task for Personnels. Keeping track of various leave types, managing approvals, and ensuring accurate records can become overwhelming without the right tools. Fortunately, TOM (TimeOff Manager System) offers a comprehensive solution to automate and streamline leave management processes.
 
 <img width="837" alt="TOM3" src="https://github.com/RathogwaInnocent/TimeOff_Manager_PowerApps/assets/17208775/95577184-296d-4016-9893-9db9545e1f21">
 
