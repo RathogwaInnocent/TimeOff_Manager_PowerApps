@@ -1,0 +1,64 @@
+Controls As screen:
+
+    txtDescriptionExpense As text:
+        BorderColor: =gblAppStyles.neutralLight.rgba
+        BorderThickness: =1
+        Color: =gblAppStyles.body.rgba
+        Default: =""
+        FocusedBorderThickness: =1
+        Font: =Font.'Segoe UI'
+        Height: =36
+        HoverBorderColor: =Self.BorderColor
+        HoverFill: =Self.Fill
+        PaddingLeft: =40
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =gblAppStyles.font.normal
+        Width: =250
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+    dteDateExpense As datepicker:
+        BorderColor: =gblAppStyles.neutralLight.rgba
+        BorderThickness: =1
+        Color: =gblAppStyles.body.rgba
+        Fill: =gblAppStyles.white.rgba
+        FocusedBorderThickness: =1
+        Font: =Font.'Segoe UI'
+        Height: =38
+        IconBackground: =RGBA(56, 96, 178, 0)
+        IconFill: =gblAppStyles.body.rgba
+        Size: =gblAppStyles.font.normal
+        Width: =296
+        X: =40
+        Y: =177
+        ZIndex: =2
+
+    drpCategoryExpense As dropdown:
+        BorderColor: =gblAppStyles.neutralLight.rgba
+        BorderThickness: =1
+        ChevronBackground: =RGBA(56, 96, 178, 0)
+        ChevronFill: =gblAppStyles.body.rgba
+        ChevronHoverBackground: =Self.ChevronBackground
+        ChevronHoverFill: =Self.ChevronFill
+        Color: =gblAppStyles.body.rgba
+        Default: =lclTemplateValue
+        Fill: =gblAppStyles.white.rgba
+        FocusedBorderThickness: =1
+        Font: =Font.'Segoe UI'
+        Height: =38
+        HoverFill: =ColorFade(gblAppStyles.neutralLight.rgba, 60%)
+        Items: =Choices([@Expenses].Category)
+        PressedColor: =Self.Color
+        PressedFill: =RGBA(0, 18, 107, 0)
+        SelectionColor: =Self.Color
+        SelectionFill: =Self.HoverFill
+        Size: =gblAppStyles.font.normal
+        Width: =295
+        X: =40
+        Y: =293
+        ZIndex: =3
+

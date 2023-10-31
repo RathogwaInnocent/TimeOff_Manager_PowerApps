@@ -1,0 +1,416 @@
+"'Request Leave Screen' As screen":
+    Fill: =ColorFade(Color.LightGray, 80%)
+
+    conMainconRequestLeave As groupContainer.horizontalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =3
+
+        cmpNavRequestLeave As Navigation:
+            AppStyles: |-
+                ={
+                    fontSize: 12,
+                    fontSizeTitle: 18,
+                    backgroundColor: RGBA(35,35,37,1),
+                    buttonColor: RGBA(255, 255, 255, 1),
+                    buttonBackground: RGBA(221, 39, 32, 1)
+                }
+            LayoutMinHeight: =640
+            Logo: |
+                ="timeoff-manager-website-favicon-white"
+            NavigationNodes: =colNavigation
+            Profile: |-
+                ={
+                    DisplayName: gblUser.displayName,
+                    Picture:User().Image
+                
+                }
+            Width: =300
+
+        conContentconRequestLeave As groupContainer.manualLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            ZIndex: =2
+
+            conRequestLeave As groupContainer.manualLayoutContainer:
+                Fill: =Color.White
+                Height: =Parent.Height - 40  
+                RadiusBottomLeft: =20
+                RadiusBottomRight: =20
+                RadiusTopLeft: =20
+                RadiusTopRight: =20
+                Width: =Parent.Width - 40
+                X: =20
+                Y: =20
+                ZIndex: =1
+
+                lblRequestTitleHeader As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17  
+                    Text: ="Request Leave"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.Width - 40
+                    X: =40
+                    Y: =40
+                    ZIndex: =4
+
+                txtComments As text:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    BorderThickness: =1
+                    Color: =gblAppStyles.body.rgba
+                    Default: =""
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =100
+                    HoverBorderColor: =Self.BorderColor
+                    HoverFill: =Self.Fill
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =40
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =gblAppStyles.font.normal
+                    Width: =500
+                    X: =lblComments.X
+                    Y: =lblComments.Y + lblComments.Height + 10
+                    ZIndex: =5
+
+                lblAbsenceFrom As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =26
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: |-
+                        ="From:"
+                    Width: =121
+                    X: =40
+                    Y: =drpRequestType.Y + drpRequestType.Height + 5
+                    ZIndex: =6
+
+                lblAbsenceTo As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =26
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: |-
+                        ="To:"
+                    Width: =121
+                    X: =255
+                    Y: =drpRequestType.Y + drpRequestType.Height + 5
+                    ZIndex: =7
+
+                lblComments As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =26
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: ="Comments"
+                    Width: =121
+                    X: =40
+                    Y: |-
+                        =If(
+                            lblSecondaryApprover.Visible,
+                            cmbSecondaryApprover.Y + cmbSecondaryApprover.Height + 10,
+                            If(
+                                lblApprover.Visible,
+                                cmbApprover.Y + cmbApprover.Height + 10,
+                                dteAbsenceTo.Y + dteAbsenceTo.Height + 10
+                        
+                            )
+                        )
+                    ZIndex: =8
+
+                dteAbsenceFrom As datepicker:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    BorderThickness: =1
+                    Color: =gblAppStyles.body.rgba
+                    Fill: =gblAppStyles.white.rgba
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =38
+                    IconBackground: =RGBA(56, 96, 178, 0)
+                    IconFill: =gblAppStyles.body.rgba
+                    Size: =gblAppStyles.font.normal
+                    Width: =164
+                    X: =lblAbsenceFrom.X
+                    Y: =lblAbsenceFrom.Y + lblAbsenceFrom.Height + 10
+                    ZIndex: =9
+
+                dteAbsenceTo As datepicker:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    BorderThickness: =1
+                    Color: =gblAppStyles.body.rgba
+                    Fill: =gblAppStyles.white.rgba
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =38
+                    IconBackground: =RGBA(56, 96, 178, 0)
+                    IconFill: =gblAppStyles.body.rgba
+                    Size: =gblAppStyles.font.normal
+                    Width: =164
+                    X: =255
+                    Y: =lblAbsenceFrom.Y + lblAbsenceFrom.Height + 10
+                    ZIndex: =10
+
+                lblRequestType As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =26
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: |-
+                        ="Request Type:"
+                    Width: =121
+                    X: =40
+                    Y: =95
+                    ZIndex: =11
+
+                drpRequestType As dropdown:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    BorderThickness: =1
+                    ChevronBackground: =RGBA(56, 96, 178, 0)
+                    ChevronFill: =gblAppStyles.body.rgba
+                    ChevronHoverBackground: =Self.ChevronBackground
+                    ChevronHoverFill: =Self.ChevronFill
+                    Color: =gblAppStyles.body.rgba
+                    Default: ="Vacation"
+                    Fill: =gblAppStyles.white.rgba
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    Height: =38
+                    HoverFill: =ColorFade(gblAppStyles.neutralLight.rgba, 60%)
+                    Items: ='Absence Types'
+                    PressedColor: =Self.Color
+                    PressedFill: =RGBA(0, 18, 107, 0)
+                    SelectionColor: =Self.Color
+                    SelectionFill: =Self.HoverFill
+                    Size: =gblAppStyles.font.normal
+                    Width: =295
+                    X: =lblRequestType.X
+                    Y: =lblRequestType.Y + lblRequestType.Height + 5
+                    ZIndex: =12
+
+                lblApprover As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =26
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: |-
+                        ="Approver:"
+                    Visible: =drpRequestType.Selected.'Needs Approval'
+                    Width: =121
+                    X: =40
+                    Y: =dteAbsenceTo.Y + dteAbsenceTo.Height + 10
+                    ZIndex: =13
+
+                cmbApprover As combobox:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    ChevronBackground: =RGBA(56, 96, 178, 0)
+                    ChevronFill: =gblAppStyles.body.rgba
+                    ChevronHoverFill: =Self.ChevronFill
+                    Color: =gblAppStyles.body.rgba
+                    DefaultSelectedItems: |-
+                        =With(
+                            {
+                                varManager: Office365Users.ManagerV2(gblUser.id)
+                            },
+                            {
+                                   Claims: "i:0#.f|membership|"&varManager.userPrincipalName,
+                                   Department: "",
+                                   DisplayName: varManager.displayName,
+                                   Email: varManager.mail,
+                                   JobTitle: varManager.jobTitle,
+                                   Picture: ""
+                        }
+                        )
+                    DisplayFields: =["DisplayName","Department","Picture"]
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    HoverBorderColor: =Self.Color
+                    HoverFill: =ColorFade(gblAppStyles.neutralLight.rgba,60%)
+                    Items: =Choices(Requests.Approver)
+                    PressedColor: =Self.Color
+                    PressedFill: =RGBA(0, 18, 107, 0)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: =Choices(Requests.Approver,cmbApprover.SearchText)
+                    SelectionFill: =Self.HoverFill
+                    SelectMultiple: =false
+                    Size: =gblAppStyles.font.normal
+                    Template: =ListItemTemplate.Person
+                    Visible: =lblApprover.Visible
+                    X: =lblApprover.X
+                    Y: =lblApprover.Y + lblApprover.Height + 5
+                    ZIndex: =14
+
+                lblSecondaryApprover As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =27
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =gblAppStyles.font.normal
+                    Text: |-
+                        ="Secondary Approver:"
+                    VerticalAlign: =VerticalAlign.Top
+                    Visible: =drpRequestType.Selected.'Needs Deputy'
+                    Width: =164
+                    X: =40
+                    Y: |-
+                        =If(
+                            lblApprover.Visible,
+                            cmbApprover.Y + cmbApprover.Height + 10,
+                            dteAbsenceTo.Y + dteAbsenceTo.Height + 10
+                        )
+                    ZIndex: =15
+
+                cmbSecondaryApprover As combobox:
+                    BorderColor: =gblAppStyles.neutralLight.rgba
+                    ChevronBackground: =RGBA(56, 96, 178, 0)
+                    ChevronFill: =gblAppStyles.body.rgba
+                    ChevronHoverFill: =Self.ChevronFill
+                    Color: =gblAppStyles.body.rgba
+                    DefaultSelectedItems: =
+                    DisplayFields: =["DisplayName","Department","Picture"]
+                    FocusedBorderThickness: =1
+                    Font: =Font.'Segoe UI'
+                    HoverBorderColor: =Self.Color
+                    HoverFill: =ColorFade(gblAppStyles.neutralLight.rgba,60%)
+                    InputTextPlaceholder: ="Select Approver"
+                    IsSearchable: =false
+                    Items: =Choices(Requests.Deputy)
+                    PressedColor: =Self.Color
+                    PressedFill: =RGBA(0, 18, 107, 0)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: =[]
+                    SelectionFill: =Self.HoverFill
+                    SelectMultiple: =false
+                    Size: =gblAppStyles.font.normal
+                    Template: =ListItemTemplate.Person
+                    Visible: =lblSecondaryApprover.Visible
+                    X: =lblSecondaryApprover.X
+                    Y: =lblSecondaryApprover.Y + lblSecondaryApprover.Height + 10
+                    ZIndex: =16
+
+                btnSubmitRequest As button:
+                    BorderStyle: =BorderStyle.None
+                    DisplayMode: |-
+                        =If(
+                            (
+                            IsBlank(cmbApprover) || 
+                            IsBlank(dteAbsenceFrom) ||
+                            IsBlank(dteAbsenceTo) ||
+                            IsBlank(drpRequestType)
+                            ) ||
+                            (
+                              drpRequestType.Selected.'Needs Approval' && (IsBlank(cmbApprover.SelectedItems) || IsEmpty(cmbApprover.SelectedItems))
+                            ) ||
+                            (
+                              drpRequestType.Selected.'Needs Deputy' && (IsBlank(cmbSecondaryApprover.SelectedItems) || IsEmpty(cmbSecondaryApprover.SelectedItems))
+                            ),
+                            DisplayMode.Disabled,
+                            DisplayMode.Edit
+                        )
+                    Fill: =RGBA(221, 39, 32, 1)
+                    HoverFill: =ColorFade(Self.Fill, -20%)
+                    OnSelect: |-
+                        =Set(
+                            gblSelectedRequest,
+                            Patch(
+                                Requests,
+                                Defaults(Requests),
+                                {
+                                    Person: {
+                                    Claims: "i:0#.f|membership|" & gblUser.userPrincipalName,
+                                    Department: "",
+                                    DisplayName: gblUser.displayName,
+                                    Email: gblUser.mail,
+                                    JobTitle: "",
+                                    Picture: ""
+                                    },
+                                    Approver: cmbApprover.Selected,
+                                    Deputy: cmbSecondaryApprover.Selected,
+                                    From: dteAbsenceFrom.SelectedDate,
+                                    To: dteAbsenceTo.SelectedDate,
+                                    'Request Comments': txtComments.Text,
+                                    'Absence Type': {Id: drpRequestType.Selected.ID, Value: drpRequestType.Selected.Title}
+                                }
+                            )
+                        );
+                        
+                        If(
+                            IsEmpty(Errors(Requests)),
+                            // if successfully submitted
+                            Navigate('Home Screen');
+                                If(
+                                lblApprover.Visible,
+                                Startapprovalprocess.Run(gblSelectedRequest.ID)
+                            );
+                            Reset(cmbApprover);
+                            Reset(cmbSecondaryApprover);
+                            Reset(dteAbsenceFrom);
+                            Reset(dteAbsenceTo);
+                            Reset(txtComments);
+                            Reset(drpRequestType);
+                        
+                        
+                            Notify("Leave request successfully submitted", NotificationType.Success, 2000),
+                        
+                          // if not successfully submitted
+                            Notify("Failed to capture your request, Contact your admin", NotificationType.Error, 2000)
+                        )
+                    PressedColor: =Self.Color
+                    PressedFill: =ColorFade(Self.Fill, -30%)
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =gblAppStyles.font.normal
+                    Text: ="Submit"
+                    Width: =227
+                    X: =313
+                    Y: =txtComments.Y + txtComments.Height + 20
+                    ZIndex: =17
+

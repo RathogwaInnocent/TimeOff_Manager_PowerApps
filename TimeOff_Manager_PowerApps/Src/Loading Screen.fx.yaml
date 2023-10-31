@@ -1,0 +1,228 @@
+"'Loading Screen' As screen":
+    OnVisible: |+
+        =//app loading
+        Set(gblAppLoaded,false);
+        
+        Concurrent(
+            Set(gblUser, Office365Users.MyProfileV2()),
+            Set(
+                gblParameters,
+                {
+                    source: Coalesce(Param("source"), "portal"),
+                    groupId: Coalesce(Param("groupId"), "00000000-0000-0000-0000-000000000000"),
+                    teamId: Coalesce(Param("teamId"), "19:[team-id]@thread.skype"),
+                    channelId: Coalesce( Param("channelId"), "19:[channel-id]@thread.skype"),
+                    teamName: Coalesce( Param("teamName"), "Team unknown"),
+                    channelName: Coalesce( Param("channelName"), "Channel unknown"),
+                    chatId: Coalesce( Param("chatId"), "19:[chat-id]@thread.skype"),
+        
+                    theme: Coalesce( If(Param("theme") = "{theme}","default",Param("theme")), "default"),
+        
+                    channelType: Coalesce( Param("channelType"), ""),
+                    teamSiteUrl: Coalesce( Param("teamSiteUrl"), ""),
+        
+                    locale: Coalesce( Param("locale"), ""),
+                    entityId: Coalesce( Param("entityId"), ""),
+                    subEntityId: Coalesce( Param("subEntityId"), ""),
+                    
+                    tid: Coalesce( Param("tid"), ""),
+                    isFullScreen: Coalesce( Param("isFullScreen"), ""),
+                    userLicenseType: Coalesce( Param("userLicenseType"), ""),
+                    tenantSKU: Coalesce( Param("tenantSKU"), ""),
+        
+                    isManager: Param("userTeamRole") = "0",
+                    isHostClientWeb: Param("hostClientType") = "web"
+                }
+            )
+        );
+            Set(
+                gblAppColors,
+                {
+                    backgroundDark: {hex: "#2d2b2c", rgba: RGBA(45, 43, 44,1)},
+                    backgroundDefault: {hex:"#e4e4e5" , rgba: RGBA(228,228,229,1)},
+                    backgroundHighContrast: {hex: "#ffffff" , rgba: RGBA(255,255,255,1)},
+        
+                    backgroundAltDark: {hex: "#2d2b2c", rgba: RGBA(45, 43, 44,1)},
+                    backgroundAltDefault: {hex:"#1b1d1f" , rgba: RGBA(27,29,31,1)},
+                    backgroundAltHighContrast: {hex: "#ffffff" , rgba: RGBA(255,255,255,1)},
+                    
+                    primaryAccentDark: {hex: "#6365a7", rgba: RGBA(99, 101, 167,1)},
+                    primaryAccentDefault: {hex: "#EE3E38", rgba: RGBA(238, 62, 56,1)},
+                    primaryAccentHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                    
+                    secondaryAccentDark: {hex: "#8082c3", rgba: RGBA(128,130,195,1)},
+                    secondaryAccentDefault: {hex: "#7173b0", rgba: RGBA(113,115,176,1)},
+                    secondaryAccentHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                    
+                    tertiaryAccentDark: {hex: "#e0614b", rgba: RGBA(224,97,75,1)},
+                    tertiaryAccentDefault: {hex: "#ce2c60", rgba: RGBA(206,44,96,1)},
+                    tertiaryAccentHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                    
+                    neutralLightDark: {hex: "#4f4f4f" , rgba: RGBA(79,79,79,1)},
+                    neutralLightDefault: {hex: "#d2d7da", rgba: RGBA(210,215,218,1)},
+                    neutralLightHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                    
+                    neutralStrongDark: {hex: "#7a7a7a", rgba: RGBA(122,122,122,1)},
+                    neutralStrongDefault: {hex: "#6e747a" , rgba: RGBA(140,140,140,1)},
+                    neutralStrongHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                    
+                    bodyDark: {hex: "#ffffff" , rgba: RGBA(255,255,255,1)},
+                    bodyDefault: {hex: "#1a1c1e", rgba: RGBA(0,0,0,1)},
+                    bodyHighContrast: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+        
+                    fillDark: {hex: "#201e1f" , rgba: RGBA(32,30,31,1)},
+                    fillDefault: {hex: "#26292c", rgba: RGBA(38,41,44,1)},
+                    fillHighContrast: {hex: "#ffffff", rgba: RGBA(255,255,255,1)}
+        
+                }
+            );
+        
+        
+        Set(
+            gblAppStyles,
+            {
+                background: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.backgroundDark, 
+                    "contrast", gblAppColors.backgroundHighContrast,
+                    gblAppColors.backgroundDefault
+                ),
+                backgroundAlt: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.backgroundAltDark, 
+                    "contrast", gblAppColors.backgroundAltHighContrast,
+                    gblAppColors.backgroundAltDefault
+                ),
+                primaryAccent: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.primaryAccentDark, 
+                    "contrast", gblAppColors.primaryAccentHighContrast,
+                    gblAppColors.primaryAccentDefault
+                ),
+                secondaryAccent: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.secondaryAccentDark, 
+                    "contrast", gblAppColors.secondaryAccentHighContrast,
+                    gblAppColors.secondaryAccentDefault
+                ),
+                tertiaryAccent: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.tertiaryAccentDark, 
+                    "contrast", gblAppColors.tertiaryAccentHighContrast,
+                    gblAppColors.tertiaryAccentDefault
+                ),
+                neutralLight: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.neutralLightDark, 
+                    "contrast", gblAppColors.neutralLightHighContrast,
+                    gblAppColors.neutralLightDefault
+                ),
+                neutralStrong: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.neutralStrongDark, 
+                    "contrast", gblAppColors.neutralStrongHighContrast,
+                    gblAppColors.neutralStrongDefault
+                ),
+                body: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.bodyDark, 
+                    "contrast", gblAppColors.bodyHighContrast,
+                    gblAppColors.bodyDefault
+                ),
+                fill: Switch(
+                    gblParameters.theme,
+                    "dark", gblAppColors.fillDark, 
+                    "contrast", gblAppColors.fillHighContrast,
+                    gblAppColors.fillDefault
+                ),
+                white: {hex: "#ffffff", rgba: RGBA(255,255,255,1)},
+                black: {hex: "#000000", rgba: RGBA(0,0,0,1)},
+                font: {
+                    small: 10,
+                    normal: 12,
+                    medium: 14,
+                    large: 17,
+                    extralarge: 22  
+                }
+            }
+        );
+        
+        ClearCollect(
+            colNavigation,
+            {
+                Title: "Home",
+                Screen: 'Home Screen',
+                Icon: "data:image/svg+xml," & EncodeUrl(
+        "<svg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M10.55 2.532a2.25 2.25 0 0 1 2.9 0l6.75 5.692c.507.428.8 1.057.8 1.72v2.82a2.99 2.99 0 0 0-1.5-.723V9.944a.75.75 0 0 0-.267-.573l-6.75-5.692a.75.75 0 0 0-.966 0L4.767 9.37a.75.75 0 0 0-.267.573v9.803c0 .138.112.25.25.25h3.5a.25.25 0 0 0 .25-.25v-5.5c0-.966.784-1.75 1.75-1.75h3.5c.966 0 1.75.784 1.75 1.75v2.881A2.251 2.251 0 0 0 14 19.25v-5.003a.25.25 0 0 0-.25-.25h-3.5a.25.25 0 0 0-.25.25v5.5a1.75 1.75 0 0 1-1.75 1.75h-3.5A1.75 1.75 0 0 1 3 19.747V9.944c0-.663.293-1.292.8-1.72l6.75-5.692ZM19 13a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-4 6.25c0-.69.56-1.25 1.25-1.25h5.5c.69 0 1.25.56 1.25 1.25v.088c.001.071.002.142-.001.213a2.734 2.734 0 0 1-.066.453 2.99 2.99 0 0 1-.46 1.033c-.547.78-1.587 1.463-3.473 1.463s-2.926-.683-3.472-1.463a2.99 2.99 0 0 1-.519-1.38 2.033 2.033 0 0 1-.008-.106L15 19.253v-.003Z' fill='#fff'/></svg>"
+         )
+            },
+            {
+                Title: "Request Leave",
+                Screen: 'Request Leave Screen',
+                Icon: "data:image/svg+xml," & EncodeUrl(
+        "<svg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M17.5 12a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm.25-9A3.25 3.25 0 0 1 21 6.25l.001 5.773a6.469 6.469 0 0 0-1.5-.71L19.5 8.5h-15v9.25c0 .966.784 1.75 1.75 1.75h5.064c.172.534.412 1.038.709 1.501L6.25 21A3.25 3.25 0 0 1 3 17.75V6.25A3.25 3.25 0 0 1 6.25 3h11.5Zm-.25 11-.09.008a.5.5 0 0 0-.402.402L17 14.5V17h-2.5l-.09.008a.5.5 0 0 0-.402.402L14 17.5l.008.09a.5.5 0 0 0 .402.402l.09.008H17v2.5l.008.09a.5.5 0 0 0 .402.402l.09.008.09-.008a.5.5 0 0 0 .402-.402L18 20.5V18h2.5l.09-.008a.5.5 0 0 0 .402-.402L21 17.5l-.008-.09a.5.5 0 0 0-.402-.402L20.5 17H18v-2.5l-.008-.09a.5.5 0 0 0-.402-.402L17.5 14Zm.25-9.5H6.25A1.75 1.75 0 0 0 4.5 6.25V7h15v-.75a1.75 1.75 0 0 0-1.75-1.75Z' fill='#fff'/></svg>"
+         )
+            },
+            {
+                Title: "Approve Requests",
+                Screen: 'Approve Request Screen',
+                Icon: "data:image/svg+xml," & EncodeUrl(
+        "<svg width='24' height='24' fill='none' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M11.78 1.72a.75.75 0 1 0-1.06 1.06L11.94 4a9 9 0 1 0 9.023 9.82.75.75 0 0 0-1.494-.135A7.5 7.5 0 1 1 11.94 5.5l-1.22 1.22a.75.75 0 0 0 1.061 1.06l2.5-2.5a.75.75 0 0 0 0-1.06l-2.5-2.5Z' fill='#fff'/><path d='M15.784 10.22a.75.75 0 0 1 0 1.06l-4.504 4.504a.75.75 0 0 1-1.06 0l-2-2a.75.75 0 0 1 1.06-1.06l1.47 1.469 3.973-3.973a.75.75 0 0 1 1.06 0Z' fill='#fff'/></svg>"
+        
+        )
+        
+            }
+        );
+        
+        
+        // finished loading
+        Set(gblAppLoaded,true);
+        
+        
+
+    lblLoading As label:
+        Align: =Align.Center
+        Height: =70
+        Size: =16
+        Text: ="Loading"
+        Width: =Parent.Width
+        Y: =imgLoading.Y + imgLoading.Height + 20
+        ZIndex: =2
+
+    imgLoading As image:
+        Height: =285
+        Image: |-
+            ="data:image/svg+xml," & EncodeUrl(
+            "<svg xmlns='http://www.w3.org/2000/svg' data-name='Layer 1' width='892.6139' height='540.80203' viewBox='0 0 892.6139 540.80203' xmlns:xlink='http://www.w3.org/1999/xlink'><title>season_change</title><circle cx='73.89615' cy='71.32961' r='46' fill='#ff6584'/><ellipse cx='444.00318' cy='522.80203' rx='444.00318' ry='18' fill='#e6e6e6'/><circle cx='113' cy='184.2194' r='113' fill='#ee3e38'/><polygon points='123.892 524.581 100.747 524.581 111.298 167.201 123.892 524.581' fill='#3f3d56'/><polygon points='113.34 234.933 138.187 200.557 113 243.442 110.277 238.677 113.34 234.933' fill='#3f3d56'/><polygon points='110.617 269.65 85.771 235.274 110.958 278.159 113.681 273.394 110.617 269.65' fill='#3f3d56'/><polygon points='827.505 524.957 804.361 524.957 814.912 167.577 827.505 524.957' fill='#3f3d56'/><polygon points='816.954 235.309 841.801 200.933 816.614 243.818 813.891 239.053 816.954 235.309' fill='#3f3d56'/><polygon points='814.231 270.026 789.385 235.65 814.572 278.535 817.295 273.77 814.231 270.026' fill='#3f3d56'/><circle cx='459.05561' cy='314.39327' r='210.50358' fill='#3f3d56'/><circle cx='459.05561' cy='314.39327' r='193.07779' fill='#fff'/><circle cx='458.35857' cy='315.0903' r='25.79017' fill='#3f3d56'/><rect x='452.78232' y='131.07392' width='11.15251' height='20.91095' fill='#3f3d56'/><rect x='452.78232' y='478.19572' width='11.15251' height='20.91095' fill='#3f3d56'/><rect x='432.91447' y='484.23381' width='11.15251' height='20.91095' transform='translate(779.48696 -123.40042) rotate(90)' fill='#3f3d56'/><rect x='780.03627' y='484.23381' width='11.15251' height='20.91095' transform='translate(1126.60876 -470.52223) rotate(90)' fill='#3f3d56'/><polygon points='450.924 326.286 460.455 304.493 579.88 370.635 450.924 326.286' fill='#3f3d56'/><rect x='431.87137' y='53.00636' width='54.36848' height='62.73286' fill='#3f3d56'/><ellipse cx='459.05561' cy='53.00636' rx='62.73286' ry='17.42579' fill='#3f3d56'/><path d='M730.1985,531.28345l-3.48516,4.87922s-16.03173,18.81986-16.72876,9.75845,11.84954-15.3347,11.84954-15.3347l6.97032-4.18219Z' transform='translate(-153.69305 -179.59899)' fill='#ffb8b8'/><path d='M829.41778,547.74522l2.91833,5.238s10.14843,22.54357,1.66044,19.29564-8.78836-17.27221-8.78836-17.27221l-.79685-8.08957Z' transform='translate(-153.69305 -179.59899)' fill='#ffb8b8'/><circle cx='660.03348' cy='254.04245' r='21.22425' fill='#2f2e41'/><path d='M811.75122,607.95694l2.78812,18.12283V631.656h16.03173V624.6857s.697-12.54657-2.09109-16.03173S811.75122,607.95694,811.75122,607.95694Z' transform='translate(-153.69305 -179.59899)' fill='#ffb8b8'/><path d='M783.17291,607.95694l2.78813,18.12283V631.656h16.03173V624.6857s.697-12.54657-2.09109-16.03173S783.17291,607.95694,783.17291,607.95694Z' transform='translate(-153.69305 -179.59899)' fill='#ffb8b8'/><path d='M793.96129,462.38371s-6.16626,3.25-1.9546,10.64285,28.92249,83.8766,28.92249,83.8766l14.25582-4.04685-12.57235-48.37053-7.1988-30.40158Z' transform='translate(-153.69305 -179.59899)' fill='#ee3e38'/><circle cx='657.70965' cy='260.02479' r='16.03173' fill='#ffb8b8'/><path d='M818.72153,442.06339l-2.09109,32.76049L801.99277,464.3684s4.87922-19.51689,3.48516-20.911Z' transform='translate(-153.69305 -179.59899)' fill='#ffb8b8'/><path d='M818.72153,472.03575l-15.769-11.67706s-7.23305-2.9606-9.32415.52455-12.54657,55.06551-6.97032,64.824c0,0,29.97237,6.27328,36.24565,2.78812l2.78813-18.12282s3.48516-11.15251-2.0911-18.12283Z' transform='translate(-153.69305 -179.59899)' fill='#ee3e38'/><path d='M797.81058,461.58028s-5.57625-4.18219-10.45548,2.78812-63.42988,62.03583-63.42988,62.03583l9.75844,11.15251,38.33675-32.06346,24.39611-19.51689Z' transform='translate(-153.69305 -179.59899)' fill='#ee3e38'/><path d='M823.25224,528.14681s-34.50307-6.6218-37.98823-1.74258l-.697,7.66735s-7.66735,14.63766-3.48516,38.33674,1.39406,38.33675,1.39406,38.33675,18.81986-2.0911,32.76049,0,16.03173,0,16.03173,0Z' transform='translate(-153.69305 -179.59899)' fill='#2f2e41'/><path d='M831.96514,628.86789l-20.21392.697,6.97031,52.27739s-5.57625,22.305.697,23.69907a70.7125,70.7125,0,0,0,13.24361,1.39407s6.27328,6.27328,13.2436,5.57625a39.034,39.034,0,0,0,13.2436-4.18219s1.39407-4.18219-3.48516-5.57625-18.12282-5.57626-20.911-20.21392Z' transform='translate(-153.69305 -179.59899)' fill='#2f2e41'/><path d='M803.38683,628.86789l-20.21392.697,6.97032,52.27739s-5.57625,22.305.697,23.69907a70.7125,70.7125,0,0,0,13.24361,1.39407s6.27328,6.27328,13.2436,5.57625a39.034,39.034,0,0,0,13.2436-4.18219s1.39407-4.18219-3.48516-5.57625S808.96309,697.177,806.175,682.53934Z' transform='translate(-153.69305 -179.59899)' fill='#2f2e41'/><circle cx='667.45803' cy='231.7041' r='8.78245' fill='#2f2e41'/><path d='M832.861,406.54593a8.78336,8.78336,0,0,0-7.86761-8.735,8.881,8.881,0,0,1,.91484-.04748,8.78244,8.78244,0,0,1,0,17.56489,8.881,8.881,0,0,1-.91484-.04748A8.78336,8.78336,0,0,0,832.861,406.54593Z' transform='translate(-153.69305 -179.59899)' fill='#2f2e41'/><ellipse cx='657.56451' cy='249.54235' rx='14.63741' ry='8.78245' fill='#2f2e41'/><path d='M1041.81277,221.75021a44.67678,44.67678,0,0,0-87.65662-9.41942c-.54125-.01942-1.082-.04117-1.628-.04117a44.68754,44.68754,0,0,0-42.86662,32.08892,31.5744,31.5744,0,0,0-37.46546,9.31921h139.36225a30.21954,30.21954,0,0,0,30.28607-31.28863Q1041.831,222.08017,1041.81277,221.75021Z' transform='translate(-153.69305 -179.59899)' fill='#e6e6e6'/><circle cx='771.6139' cy='124.178' r='12' fill='#e6e6e6'/><circle cx='807.84695' cy='95.88566' r='9.9918' fill='#e6e6e6'/><circle cx='856.6139' cy='150.178' r='12' fill='#e6e6e6'/><circle cx='765.6139' cy='205.178' r='12' fill='#e6e6e6'/><circle cx='856.6139' cy='274.178' r='12' fill='#e6e6e6'/><path d='M991.28736,685.16529c.00415-.13007.01959-.2572.01959-.38831a11.98223,11.98223,0,0,0-16.98706-10.90472,11.96811,11.96811,0,0,0-20.8316,9.91388c-.061-.00092-.12012-.00916-.18134-.00916a12,12,0,1,0,7.33429,21.48322,11.99355,11.99355,0,0,0,20.62177,1.21716,11.99014,11.99014,0,1,0,10.02435-21.31207Z' transform='translate(-153.69305 -179.59899)' fill='#e6e6e6'/><circle cx='867.6139' cy='226.178' r='5' fill='#e6e6e6'/><circle cx='835.6139' cy='106.178' r='5' fill='#e6e6e6'/><circle cx='818.6139' cy='230.178' r='5' fill='#e6e6e6'/><circle cx='822.6139' cy='225.178' r='5' fill='#e6e6e6'/><circle cx='825.6139' cy='220.178' r='5' fill='#e6e6e6'/><circle cx='813.6139' cy='262.178' r='5' fill='#e6e6e6'/><circle cx='887.6139' cy='318.178' r='5' fill='#e6e6e6'/><circle cx='780.6139' cy='321.178' r='5' fill='#e6e6e6'/><circle cx='786.6139' cy='167.178' r='5' fill='#e6e6e6'/><circle cx='809.6139' cy='257.178' r='5' fill='#e6e6e6'/><circle cx='804.6139' cy='249.178' r='5' fill='#e6e6e6'/></svg>"
+             )
+        Width: =570
+        X: =398
+        Y: =170
+        ZIndex: =3
+
+    lblVersion As label:
+        AutoHeight: =true
+        Font: =Font.'Segoe UI'
+        Height: =70
+        Size: =gblAppStyles.font.normal
+        Text: ="v1.0"
+        Width: =560
+        Y: =Parent.Height - Self.Height
+        ZIndex: =4
+
+    tmrLoadingDelay As timer:
+        AutoStart: =true
+        Duration: =500
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                gblAppLoaded,
+                Navigate('Home Screen')
+            );
+        Repeat: =!gblAppLoaded
+        Visible: =false
+        Width: =280
+        X: =100
+        Y: =100
+        ZIndex: =5
+

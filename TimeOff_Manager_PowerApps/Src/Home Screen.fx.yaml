@@ -1,0 +1,722 @@
+"'Home Screen' As screen":
+    Fill: =ColorFade(Color.LightGray, 80%)
+
+    conMainHome As groupContainer.horizontalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutMode: =LayoutMode.Auto
+        Width: =Parent.Width
+        ZIndex: =3
+
+        cmpNavHome As Navigation:
+            AppStyles: |-
+                ={
+                    fontSize: 12,
+                    fontSizeTitle: 18,
+                    backgroundColor: RGBA(35,35,37,1),
+                    buttonColor: RGBA(255, 255, 255, 1),
+                    buttonBackground: RGBA(221, 39, 32, 1)
+                }
+            LayoutMinHeight: =640
+            Logo: |
+                ="timeoff-manager-website-favicon-white"
+            NavigationNodes: =colNavigation
+            Profile: |-
+                ={
+                    DisplayName: gblUser.displayName,
+                    Picture:User().Image
+                
+                }
+            Width: =300
+
+        conContent As groupContainer.manualLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            ZIndex: =2
+
+            conPendingRequests As groupContainer.manualLayoutContainer:
+                Fill: =Color.White
+                Height: =707
+                RadiusBottomLeft: =20
+                RadiusBottomRight: =20
+                RadiusTopLeft: =20
+                RadiusTopRight: =20
+                Width: =513
+                X: =20
+                Y: =40
+                ZIndex: =1
+
+                "glyPendingRequests As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+                    DelayItemLoading: =true
+                    Height: =623
+                    Items: |-
+                        =Filter(
+                            Requests,
+                            Status.Value = "In Progress"
+                        )
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TemplatePadding: =0
+                    TemplateSize: =135
+                    Width: =473
+                    X: =20
+                    Y: =84
+                    ZIndex: =1
+
+                    Title2 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =25
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =gblAppStyles.font.normal
+                        Text: |-
+                            ="From:"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =121
+                        X: =4
+                        Y: =15
+                        ZIndex: =1
+
+                    Subtitle2 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =25
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =gblAppStyles.font.normal
+                        Text: =ThisItem.From
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Title2.Width
+                        X: =14
+                        Y: =40
+                        ZIndex: =2
+
+                    Separator2 As rectangle:
+                        Fill: =gblAppStyles.neutralLight.rgba
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                        ZIndex: =4
+
+                    txtAbsenceType As text:
+                        Align: =Align.Center
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =0
+                        Default: =ThisItem.'Absence Type'.Value
+                        DisabledColor: =ColorFade(Self.Fill, -80%)
+                        DisabledFill: |-
+                            =
+                            ColorValue(LookUp('Absence Types', ID = ThisItem.'Absence Type'.Id).Color)
+                        DisplayMode: =DisplayMode.Disabled
+                        Font: =Font.'Segoe UI'
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =2
+                        PaddingLeft: =2
+                        PaddingRight: =2
+                        PaddingTop: =2
+                        Size: =gblAppStyles.font.small
+                        Width: =117
+                        X: =217
+                        Y: =99
+                        ZIndex: =6
+
+                    Subtitle2_1 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =25
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =gblAppStyles.font.normal
+                        Text: =ThisItem.To
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =139
+                        X: =217
+                        Y: =40
+                        ZIndex: =8
+
+                    Image2 As image:
+                        Height: =Self.Width
+                        Image: =ThisItem.'Approved By'.Picture
+                        OnSelect: =Select(Parent)
+                        RadiusBottomLeft: =50
+                        RadiusBottomRight: =50
+                        RadiusTopLeft: =50
+                        RadiusTopRight: =50
+                        Width: =35
+                        X: =14
+                        Y: =94
+                        ZIndex: =9
+
+                    Title2_3 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =25
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =gblAppStyles.font.normal
+                        Text: =ThisItem.'Approved By'.DisplayName
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =133
+                        X: =62
+                        Y: =99
+                        ZIndex: =10
+
+                    Title2_4 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =25
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14 
+                        Text: |-
+                            ="Approver:"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =121
+                        X: =4
+                        Y: =65
+                        ZIndex: =11
+
+                    Title2_1 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =19
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            ="To:"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =121
+                        X: =202
+                        Y: =15
+                        ZIndex: =12
+
+                    Title2_5 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =19
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            ="Reason:"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =121
+                        X: =202
+                        Y: =65
+                        ZIndex: =13
+
+                Title2_2 As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17  
+                    Text: ="Pending Requests"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.Width - 40
+                    X: =20
+                    Y: =20
+                    ZIndex: =2
+
+                Container1_1 As groupContainer.manualLayoutContainer:
+                    Fill: =Color.White
+                    Height: =707
+                    RadiusBottomLeft: =20
+                    RadiusBottomRight: =20
+                    RadiusTopLeft: =20
+                    RadiusTopRight: =20
+                    Width: =493
+                    ZIndex: =3
+
+                    "Gallery1_1 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        Height: =623
+                        Items: |-
+                            =Filter(
+                                Requests,
+                                Status.Value = "In Progress"
+                            )
+                        Layout: =Layout.Vertical
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =135
+                        Width: =473
+                        X: =20
+                        Y: =84
+                        ZIndex: =1
+
+                        Title2_6 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.medium
+                            Text: |-
+                                ="From:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =4
+                            Y: =15
+                            ZIndex: =1
+
+                        Subtitle2_2 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.From
+                            VerticalAlign: =VerticalAlign.Top
+                            X: =14
+                            Y: =40
+                            ZIndex: =2
+
+                        Separator2_1 As rectangle:
+                            Fill: =gblAppStyles.neutralLight.rgba
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - Self.Height
+                            ZIndex: =4
+
+                        txtAbsenceType_1 As text:
+                            Align: =Align.Center
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =0
+                            Default: =ThisItem.'Absence Type'.Value
+                            DisabledColor: =ColorFade(Self.Fill, -80%)
+                            DisabledFill: |-
+                                =
+                                ColorValue(LookUp('Absence Types', ID = ThisItem.'Absence Type'.Id).Color)
+                            DisplayMode: =DisplayMode.Disabled
+                            Font: =Font.'Segoe UI'
+                            Height: =20
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =2
+                            PaddingLeft: =2
+                            PaddingRight: =2
+                            PaddingTop: =2
+                            Size: =gblAppStyles.font.small
+                            Width: =117
+                            X: =217
+                            Y: =99
+                            ZIndex: =6
+
+                        Subtitle2_3 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.To
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =147
+                            X: =217
+                            Y: =40
+                            ZIndex: =8
+
+                        Image2_1 As image:
+                            Height: =Self.Width
+                            Image: =ThisItem.'Approved By'.Picture
+                            OnSelect: =Select(Parent)
+                            RadiusBottomLeft: =50
+                            RadiusBottomRight: =50
+                            RadiusTopLeft: =50
+                            RadiusTopRight: =50
+                            Width: =35
+                            X: =14
+                            Y: =94
+                            ZIndex: =9
+
+                        Title2_8 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =30
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.'Approved By'.DisplayName
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =155
+                            X: =62
+                            Y: =99
+                            ZIndex: =10
+
+                        Title2_9 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14 
+                            Text: |-
+                                ="Approver:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =4
+                            Y: =65
+                            ZIndex: =11
+
+                        Title2_7 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =19
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: |-
+                                ="To:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =217
+                            Y: =18
+                            ZIndex: =12
+
+                        Title2_10 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =19
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: |-
+                                ="Reason:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =217
+                            Y: =65
+                            ZIndex: =13
+
+                    lblTitlePendingRquests As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =25
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =17  
+                        Text: ="Pending Requests"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width - 40
+                        X: =20
+                        Y: =20
+                        ZIndex: =2
+
+        conContent_2 As groupContainer.manualLayoutContainer:
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            ZIndex: =3
+
+            Container1_2 As groupContainer.manualLayoutContainer:
+                Fill: =Color.White
+                Height: =707
+                RadiusBottomLeft: =20
+                RadiusBottomRight: =20
+                RadiusTopLeft: =20
+                RadiusTopRight: =20
+                Width: =498
+                X: =20
+                Y: =40
+                ZIndex: =1
+
+                Title2_18 As label:
+                    Color: =gblAppStyles.body.rgba
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =17  
+                    Text: ="Pending Requests"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.Width - 40
+                    X: =20
+                    Y: =20
+                    ZIndex: =2
+
+                Container1_3 As groupContainer.manualLayoutContainer:
+                    Fill: =Color.White
+                    Height: =707
+                    RadiusBottomLeft: =20
+                    RadiusBottomRight: =20
+                    RadiusTopLeft: =20
+                    RadiusTopRight: =20
+                    Width: =496
+                    ZIndex: =3
+
+                    "Gallery1_2 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        Height: =623
+                        Items: |-
+                            =Filter(
+                                Requests,
+                                Status.Value = "Approved"
+                            )
+                        Layout: =Layout.Vertical
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =135
+                        Width: =476
+                        X: =20
+                        Y: =84
+                        ZIndex: =1
+
+                        Title2_13 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.medium
+                            Text: |-
+                                ="From:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =4
+                            Y: =15
+                            ZIndex: =1
+
+                        Subtitle2_4 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.From
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =145
+                            X: =14
+                            Y: =40
+                            ZIndex: =2
+
+                        Separator2_2 As rectangle:
+                            Fill: =gblAppStyles.neutralLight.rgba
+                            Height: =1
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight - Self.Height
+                            ZIndex: =4
+
+                        txtAbsenceType_2 As text:
+                            Align: =Align.Center
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =0
+                            Default: =ThisItem.'Absence Type'.Value
+                            DisabledColor: =ColorFade(Self.Fill, -80%)
+                            DisabledFill: |-
+                                =
+                                ColorValue(LookUp('Absence Types', ID = ThisItem.'Absence Type'.Id).Color)
+                            DisplayMode: =DisplayMode.Disabled
+                            Font: =Font.'Segoe UI'
+                            Height: =20
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =2
+                            PaddingLeft: =2
+                            PaddingRight: =2
+                            PaddingTop: =2
+                            Size: =gblAppStyles.font.small
+                            Width: =117
+                            X: =217
+                            Y: =99
+                            ZIndex: =6
+
+                        Subtitle2_5 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.To
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =139
+                            X: =217
+                            Y: =40
+                            ZIndex: =8
+
+                        Image2_2 As image:
+                            Height: =Self.Width
+                            Image: =ThisItem.'Approved By'.Picture
+                            OnSelect: =Select(Parent)
+                            RadiusBottomLeft: =50
+                            RadiusBottomRight: =50
+                            RadiusTopLeft: =50
+                            RadiusTopRight: =50
+                            Width: =35
+                            X: =14
+                            Y: =94
+                            ZIndex: =9
+
+                        Title2_17 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =20
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =gblAppStyles.font.normal
+                            Text: =ThisItem.'Approved By'.DisplayName
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =152
+                            X: =49
+                            Y: =99
+                            ZIndex: =10
+
+                        Title2_15 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =25
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =14 
+                            Text: |-
+                                ="Approver:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =4
+                            Y: =65
+                            ZIndex: =11
+
+                        Title2_14 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =19
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: |-
+                                ="To:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =217
+                            Y: =18
+                            ZIndex: =12
+
+                        Title2_16 As label:
+                            Color: =gblAppStyles.body.rgba
+                            Font: =Font.'Segoe UI'
+                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                            Height: =19
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: |-
+                                ="Reason:"
+                            VerticalAlign: =VerticalAlign.Top
+                            Width: =121
+                            X: =217
+                            Y: =65
+                            ZIndex: =13
+
+                    Title2_12 As label:
+                        Color: =gblAppStyles.body.rgba
+                        Font: =Font.'Segoe UI'
+                        FontWeight: =FontWeight.Semibold
+                        Height: =25
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =17  
+                        Text: ="Approved Requests"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.Width - 40
+                        X: =20
+                        Y: =20
+                        ZIndex: =2
+
